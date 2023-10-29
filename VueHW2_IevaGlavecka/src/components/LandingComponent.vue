@@ -5,6 +5,9 @@
       <p>
         POWERED BY <span class="spotify-text">SPOTIFY API</span>
       </p>
+      <p>
+        
+      </p>
     </div>
   </div>
 </template>
@@ -16,12 +19,11 @@ export default {
 </script>
 
 <style scoped>
-/* Add your styles for LandingComponent here */
 .landing {
   padding: 130px;
 }
 .content {
-  max-width: 300px; /* Set the maximum width of the container */
+  max-width: 300px;
 }
 .landing h1 {
   color: #FFF;

@@ -6,9 +6,9 @@ export const useStore = defineStore({
   state: () => ({
     all_songs: songList,
     user: {
-      firstName: 'Ieva',
-      lastName: 'Glavecka',
-      studentCode: 'IT21043',
+      firstName: 'name',
+      lastName: 'surname',
+      studentCode: 'CODE1234',
       loggedInAt: [],
       isLoggedIn: false
     }
@@ -24,17 +24,18 @@ export const useStore = defineStore({
         minute: '2-digit'
       })
       this.user.loggedInAt.push(timestamp)
+      localStorage.setItem('user', JSON.stringify(this.user));
     },
     logoutUser() {
       this.user.isLoggedIn = false
-      this.user.loggedInAt = []
     },
     resetUser() {
-      this.user.firstName = 'name'
-      this.user.lastName = 'surname'
+      this.user.firstName = 'Ieva'
+      this.user.lastName = 'Glavecka'
       this.user.studentCode = 'CODE1234'
-      this.user.loggedInAt = []
-      this.user.isLoggedIn = false
-    }
+    },
+    toggleFormState() {
+      this.user.isFormActive = !this.user.isFormActive;
+    },
   }
 })

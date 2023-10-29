@@ -1,15 +1,15 @@
 <template>
-  <div class="header">
+  <div class="header" :style="{ background: headerBackground }">
     <div class="nav-left">
       <img class="logo" src="@/assets/logo.svg" alt="Logo" />
       <span class="brand">KRAKEN.FM</span>
     </div>
     <div class="nav-right">
-      <div v-if="useStore().user.loginUser">
+      <span v-if="useStore().user.isLoggedIn" class="user-info">
         <div class="avatar"></div>
         <p>{{ fullName }}</p>
         <button @click="handleLogout">LOGOUT</button>
-      </div>
+      </span>
       <div v-else>
         <button @click="handleLogin">LOGIN</button>
       </div>
@@ -21,6 +21,7 @@
 import { ref } from 'vue';
 import { useStore } from '../store/globalStore';
 import { watchEffect } from 'vue';
+import router from '@/router/index.js';
 
 const fullName = ref('');
 
@@ -32,6 +33,7 @@ const handleLogin = () => {
   const confirmed = window.confirm('Do you want to log in?');
   if (confirmed) {
     useStore().loginUser();
+    router.push('/home');
   }
 };
 
@@ -39,6 +41,7 @@ const handleLogout = () => {
   const confirmed = window.confirm('Do you want to log out?');
   if (confirmed) {
     useStore().logoutUser();
+    router.push('/');
   }
 };
 </script>
@@ -51,8 +54,6 @@ const handleLogout = () => {
   color: white;
   padding: 10px 20px;
   flex-shrink: 0;
-  border-bottom: 1px solid #916DDC;
-  background: rgba(8, 2, 16, 0.50);
 }
 
 .nav-left {
@@ -84,7 +85,7 @@ const handleLogout = () => {
 button {
   cursor: pointer;
   background-color: #7E58D0;
-  color: #1C073A;
+  color: #ffffff;
   font-family: Inter;
   font-size: 16px;
   font-style: normal;
@@ -106,9 +107,18 @@ button:hover {
   align-items: center;
   margin-right: 10px;
   position: relative;
+  color: #FFF;
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.user-info > p {
   border-right: 1px solid white; /* Add border between user's name and logout button */
   padding-right: 10px;
-
 }
 
 .user-info::before {
